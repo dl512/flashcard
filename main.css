@@ -41,7 +41,6 @@
     margin: 16px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
   
   .note h1 {
@@ -56,13 +55,26 @@
     word-wrap: break-word;
   }
   
-  .note button {
-    color: #f5ba13;
-    border: none;
-    width: 36px;
-    height: 36px;
+  .btn {
+    display: flex;
+    margin: 16px;
+    margin-top: 32px;
+  }
+
+  .btn button {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #000;
     cursor: pointer;
-    outline: none;
-    align-self: flex-end;
-    margin-top: auto;
+    border: 3px solid;
+    padding: 0.25em 0.5em;
+    box-shadow: 1px 1px 0px 0px, 2px 2px 0px 0px, 3px 3px 0px 0px, 4px 4px 0px 0px, 5px 5px 0px 0px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    margin-right: 32px;
   }
