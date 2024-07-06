@@ -8,24 +8,53 @@ for (var i = 1; i < jsonObject.length; i++) {
   csvData.push(jsonObject[i].match(/(".*?"|[^",]+)(?=,|$)/g));
 }
 
-var randNum = Math.floor(Math.random() * csvData.length);
+var randNum;
+var batchNum = 10;
+var batch = new Array();
+var pointer = -1;
 
-$(".show").on("click", function () {
+function reshuffle() {
+  var i = 0;
+  batch = new Array();
+  while (i < batchNum) {
+    randNum = Math.floor(Math.random() * csvData.length);
+    if (batch.includes(randNum) == false) {
+      batch.push(randNum);
+      i = i + 1;
+    }
+  }
+}
+
+function showMeaning() {
   $(".meaning").html(
     "<p>" +
-      csvData[randNum][1] +
+      csvData[batch[pointer]][1] +
       "</p>" +
       "<p>" +
-      csvData[randNum][2] +
+      csvData[batch[pointer]][2] +
       "</p>" +
       "<p>" +
-      csvData[randNum][3] +
+      csvData[batch[pointer]][3] +
       "</p>"
   );
+}
+
+function showNextWord() {
+  pointer = (pointer + 1) % batchNum;
+  $(".word").text(csvData[batch[pointer]][0]);
+  $(".meaning").html("");
+}
+
+$(".show").on("click", function () {
+  showMeaning();
 });
 
 $(".next").on("click", function () {
-  randNum = Math.floor(Math.random() * csvData.length);
-  $(".word").text(csvData[randNum][0]);
-  $(".meaning").html("");
+  showNextWord();
+});
+
+$(".reshuffle").on("click", function () {
+  reshuffle();
+  $(".reshuffle").text("Next " + batchNum);
+  showNextWord();
 });
